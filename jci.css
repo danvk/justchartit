@@ -1,0 +1,16 @@
+body {
+}
+
+#chart {
+  position: absolute;
+  left: 320px;
+  right: 20px;
+  top: 20px;
+  height: 400px;
+}
+#config {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 300px;
+}
