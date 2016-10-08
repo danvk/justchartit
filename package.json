@@ -1,0 +1,28 @@
+{
+  "name": "justchartit",
+  "version": "1.0.0",
+  "description": "Have data? Just chart it!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danvk/justchartit.git"
+  },
+  "keywords": [
+    "dygraphs"
+  ],
+  "author": "Dan Vanderkam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danvk/justchartit/issues"
+  },
+  "homepage": "https://github.com/danvk/justchartit#readme",
+  "dependencies": {
+    "dygraphs": "file:///Users/danvk/github/dygraphs",
+    "handsontable": "^0.28.3",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  }
+}
