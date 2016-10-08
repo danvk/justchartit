@@ -10,6 +10,9 @@ export const CSS = `
 `;
 
 export const JS = `
+g = new Dygraph(document.getElementById('graph'), data, {
+
+});
 `;
 
 export const data = [

@@ -1,0 +1,4 @@
+.html-panel, .css-panel, .js-panel {
+  font-family: monospace;
+  white-space: pre;
+}

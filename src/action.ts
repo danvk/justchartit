@@ -2,9 +2,12 @@
  * All actions which can be taken within Just Chart It.
  */
 
-export interface SetData {
-  type: 'set-data';
-  data: string[][];
+type Edit = [number, number, string, string];  // row, col, old value, new value
+
+export interface SetCells {
+  type: 'set-cells',
+  source: string;  // e.g. autofill, paste, edit, ...
+  edits: Edit[];
 }
 
 export interface SetJS {
@@ -31,7 +34,7 @@ export interface CreateShareLink {
   type: 'create-share-link';
 }
 
-type Action = SetData |
+type Action = SetCells |
               SetJS |
               SetCSS |
               SetHTML |

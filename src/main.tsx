@@ -3,6 +3,8 @@ import * as ReactDOM from 'react-dom';
 
 import createStore, {State} from './datastore';
 import NotificationBar from './notification-bar';
+import Preview from './preview';
+import Spreadsheet from './spreadsheet';
 
 const rootEl = document.getElementById('root');
 const store = createStore();
@@ -27,19 +29,25 @@ class Root extends React.Component<{}, State> {
           error={this.state.error}
           clearError={this.clearError} />
         <div className='table-panel'>
-          table
+          <Spreadsheet
+              {...this.state}
+              handleAction={store.dispatch} />
         </div>
         <div className='html-panel'>
-          HTML
+          <h3>HTML</h3>
+          {this.state.html}
         </div>
         <div className='css-panel'>
-          CSS
+          <h3>CSS</h3>
+          {this.state.css}
         </div>
         <div className='js-panel'>
-          JS
+          <h3>JS</h3>
+          {this.state.js}
         </div>
         <div className='output-panel'>
-          Output
+          <h3>Output</h3>
+          <Preview {...this.state} />
         </div>
       </div>
     );

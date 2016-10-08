@@ -26,8 +26,8 @@ function createStore() {
 
   function handleAction(action: Action) {
     switch (action.type) {
-      case 'set-data':
-        setData(action as actions.SetData);
+      case 'set-cells':
+        setCells(action as actions.SetCells);
         break;
 
       case 'set-js':
@@ -52,8 +52,10 @@ function createStore() {
     }
   }
 
-  function setData(action: actions.SetData) {
-    data = action.data;
+  function setCells(action: actions.SetCells) {
+    for (const [row, col, , newValue] of action.edits) {
+      data[row][col] = newValue;
+    }
     updateChart();
     stateChanged();
   }
