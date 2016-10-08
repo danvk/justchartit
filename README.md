@@ -18,9 +18,9 @@ To-do:
   - Support drag & drop import of [CT]SV files
 - UI
   ✓ Create a preview panel
-  - Set up Monaco editor for HTML, CSS, JS
+  ✓ Set up Monaco editor for HTML, CSS, JS
   - Add in dygraphs typings
-  - Add some presets
+  - Add some preset styles
 - Sharing
   - Post anonymous gists which are loadable with bl.ocks.org
   - Load anonymous gists

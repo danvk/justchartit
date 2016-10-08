@@ -9,7 +9,6 @@ declare const require: any;
 interface Props {
   value: string;
   language: string;
-  buttonText: string;
   onSubmit: (newValue: string) => any;
 }
 
@@ -58,11 +57,7 @@ export default class MonacoEditor extends React.Component<Props, {}> {
 
   render(): JSX.Element {
     return (
-      <div>
-        <div className='monaco-editor' ref='editor'></div>
-        <br/>
-        <button onClick={this.handleSubmit}>{this.props.buttonText}</button>
-      </div>
+      <div className='monaco-editor' ref='editor'></div>
     );
   }
 
