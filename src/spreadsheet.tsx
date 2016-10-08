@@ -37,14 +37,6 @@ export default class Spreadsheet extends React.Component<Props, State> {
           source,
           edits: change,
         });
-        // this.
-        // console.log(source);
-        // console.log(change);
-
-        // loadData, null
-        // edit, [[row, col, oldValue, newValue], ...]
-        // paste, [[row, col, oldValue, newValue], ...]
-        // autofill, ...
       },
     });
   }

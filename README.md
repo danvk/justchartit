@@ -5,18 +5,22 @@ Got some data? Just chart it!
 To-do:
 
 - Infrastructure
-  - Set up copy-webpack-plugin
-  - Update to TS 2
+  ✓ Set up copy-webpack-plugin
+  ✓ Update to TS 2
   - Set noImplicitAny
   - Set strictNullChecks
+  - Figure out how to `import * as Dygraph from 'dygraph'`.
 - Handsontable
+  ✓ Bind data changes to/from store
+  - Support pasting CSV data?
   - Add a header row with styling
-  - Bind data changes to/from store
   - Validate numbers in body cells
+  - Support drag & drop import of [CT]SV files
 - UI
+  ✓ Create a preview panel
   - Set up Monaco editor for HTML, CSS, JS
   - Add in dygraphs typings
-  - Create a preview panel
+  - Add some presets
 - Sharing
   - Post anonymous gists which are loadable with bl.ocks.org
   - Load anonymous gists

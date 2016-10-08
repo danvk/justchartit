@@ -23,6 +23,7 @@
     "dygraphs": "git+https://git@github.com/danvk/dygraphs.git#2.0.0-dev1",
     "handsontable": "^0.28.3",
     "monaco": "^1.201608162214.0",
+    "monaco-editor": "^0.7.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   },

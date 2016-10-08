@@ -76,7 +76,7 @@ export default class MonacoEditor extends React.Component<Props, {}> {
       this.editor = monaco.editor.create(this.refs['editor'] as HTMLDivElement, {
         value: this.props.value || '',
         language: this.props.language,
-        lineNumbers: false,
+        lineNumbers: 'on',
       });
 
       this.editor.onKeyDown(event => {

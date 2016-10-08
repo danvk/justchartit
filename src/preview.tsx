@@ -20,7 +20,11 @@ export default class Preview extends React.Component<Props, {}> {
     const indirectEval = eval;
     const data = this.props.data.map(row => row.join(',')).join('\n');
     const fullJS = `const data = \`${data}\`;\n${this.props.js}`;
-    console.log(fullJS);
+    // console.log(fullJS);
     indirectEval(fullJS);
+  }
+
+  componentDidMount() {
+    this.componentDidUpdate(null);
   }
 }

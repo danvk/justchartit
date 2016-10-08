@@ -41,8 +41,10 @@ jspm_packages
 *.js.map
 /typings
 
+# Generated code
+static/dygraphs/
+static/handsontable/
 /static/vs
-/static/fixed-data-table*.css
 
 # Intellij.
 .idea/
