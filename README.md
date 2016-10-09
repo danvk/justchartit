@@ -7,7 +7,7 @@ To-do:
 - Infrastructure
   ✓ Set up copy-webpack-plugin
   ✓ Update to TS 2
-  - Set noImplicitAny
+  ✓ Set noImplicitAny
   - Set strictNullChecks
   - Figure out how to `import * as Dygraph from 'dygraph'`.
 - Handsontable
@@ -19,7 +19,7 @@ To-do:
 - UI
   ✓ Create a preview panel
   ✓ Set up Monaco editor for HTML, CSS, JS
-  - Add in dygraphs typings
+  ~ Add in dygraphs typings
   - Add some preset styles
   - Togglable panels (more space for JS / the table)
 - Sharing

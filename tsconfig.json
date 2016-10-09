@@ -4,12 +4,13 @@
         "target": "es5",
         "jsx": "react",
         "noEmit": true,
-        // "noImplicitAny": true,
+        "noImplicitAny": true,
         "suppressImplicitAnyIndexErrors": true,
         "sourceMap": true
     },
     "exclude": [
         "node_modules",
+        "static",
         "typings/main",
         "typings/main.d.ts"
     ]

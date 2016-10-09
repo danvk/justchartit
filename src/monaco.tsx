@@ -36,7 +36,7 @@ function maybeAddLibs() {
 export default class MonacoEditor extends React.Component<Props, {}> {
   editor: monaco.editor.IStandaloneCodeEditor;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }

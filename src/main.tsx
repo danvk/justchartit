@@ -11,7 +11,7 @@ const rootEl = document.getElementById('root');
 const store = createStore();
 
 class Root extends React.Component<{}, State> {
-  constructor(props) {
+  constructor(props: {}) {
     super(props);
     this.state = store.getState();
     this.clearError = this.clearError.bind(this);
