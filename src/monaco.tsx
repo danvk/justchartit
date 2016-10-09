@@ -20,12 +20,15 @@ function maybeAddLibs() {
   .then(response => response.text())
   .then(text => {
     if (!hasAddedLib) {
-      console.log('adding...');
-      monaco.languages.typescript.javascriptDefaults.addExtraLib(
-      `
-      declare let data: string;
-      `);
-      monaco.languages.typescript.javascriptDefaults.addExtraLib(text, 'dygraphs.d.ts');
+      const addExtraLib = (text: string, filename?: string) =>
+          monaco.languages.typescript.javascriptDefaults.addExtraLib(text, filename);
+      addExtraLib('declare let data: string;', 'data.d.ts');
+      addExtraLib(`declare namespace google {
+        namespace visualization {
+          type DataTable = any;
+        }
+      }`, 'google.visualization.d.ts');
+      addExtraLib(text, 'dygraphs.d.ts');
       hasAddedLib = true;
     }
   }).catch(e => {

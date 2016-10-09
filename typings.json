@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
+    "dygraphs": "registry:dt/dygraphs#1.1.1+20160924173733",
     "es6-promise": "registry:dt/es6-promise#0.0.0+20160614011821",
     "google.visualization": "registry:dt/google.visualization#0.0.0+20160720064613",
     "handsontable": "registry:dt/handsontable#0.24.3+20160711161324",

@@ -30,6 +30,7 @@ export default class Spreadsheet extends React.Component<Props, State> {
       contextMenu: true,
       fixedRowsTop: 1,
       fixedColumnsLeft: 1,
+      manualColumnFreeze: true,
       afterChange: (change, source) => {
         if (source === 'loadData') return;
         this.props.handleAction({
