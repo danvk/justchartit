@@ -1,8 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import * as _ from 'underscore';
 
-import Action from './action';
+import Action, {Edit} from './action';
 import {State as DataStoreState} from './datastore';
+import * as utils from './utils';
 
 // import * as handsontable from 'handsontable';
 
@@ -34,6 +36,22 @@ export default class Spreadsheet extends React.Component<Props, State> {
       manualColumnResize: true,
       undo: true,
 
+      beforeChange: (changes: Edit[], source: string) => {
+        if (source === 'paste' && changes.length) {
+          // TODO: check that all the changes are to a single column.
+          if (_.every(changes, change => change[3].indexOf(',') >= 0)) {
+            const newChanges: Edit[] = [];
+            for (const [row, col, old, csv] of changes) {
+              const vals = csv.split(',');
+              vals.forEach((val, i) => {
+                newChanges.push([row, col + i, null, val]);
+              });
+            }
+            changes.splice(0, changes.length, ...newChanges);
+          }
+        }
+      },
+
       afterChange: (change, source) => {
         if (source === 'loadData') return;
         this.props.handleAction({
@@ -42,6 +60,16 @@ export default class Spreadsheet extends React.Component<Props, State> {
           edits: change,
         });
       },
+
+      allowInvalid: true,
+      validator: function(cell: string, callback: (valid: boolean) => any) {
+        const {row, col} = this;
+        if (row >= 1 && col >= 1 && isNaN(Number(cell)) && cell !== 'NaN') {
+          callback(false);
+        } else {
+          callback(true);
+        }
+      }
     });
   }
 

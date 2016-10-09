@@ -13,14 +13,17 @@ To-do:
 - Handsontable
   ✓ Bind data changes to/from store
   ✓ Add a header row with styling
-  - Support pasting CSV data?
-  - Validate numbers in body cells
+  ✓ Support pasting CSV data?
+  ✓ Validate numbers in body cells
   - Support drag & drop import of [CT]SV files
 - UI
   ✓ Create a preview panel
   ✓ Set up Monaco editor for HTML, CSS, JS
   ✓ Add in dygraphs typings
   ✓ Make resizing work
+  - Put in Bootstrap and add a header / menu bar
+  - Add a "Run" button
+  - Surface dygraphs errors/warnings in the UI
   - Add some preset styles
   - Togglable panels (more space for JS / the table)
 - Sharing

@@ -2,7 +2,7 @@
  * All actions which can be taken within Just Chart It.
  */
 
-type Edit = [number, number, string, string];  // row, col, old value, new value
+export type Edit = [number, number, string, string];  // row, col, old value, new value
 
 export interface SetCells {
   type: 'set-cells',
