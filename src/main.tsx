@@ -6,9 +6,16 @@ import MonacoEditor from './monaco';
 import NotificationBar from './notification-bar';
 import Preview from './preview';
 import Spreadsheet from './spreadsheet';
+import TabChooser from './tab-chooser';
 
 const rootEl = document.getElementById('root');
 const store = createStore();
+
+const TABS = [
+  'HTML',
+  'CSS',
+  'JS',
+];
 
 class Root extends React.Component<{}, State> {
   constructor(props: {}) {
@@ -17,6 +24,7 @@ class Root extends React.Component<{}, State> {
     this.clearError = this.clearError.bind(this);
     this.updateHTML = this.updateHTML.bind(this);
     this.updateCSS = this.updateCSS.bind(this);
+    this.changeTab = this.changeTab.bind(this);
   }
 
   render(): JSX.Element {
@@ -26,37 +34,44 @@ class Root extends React.Component<{}, State> {
       store.dispatch({ type: 'create-share-link' });
     };
 
+    const visStyle = (visible: boolean) => ({
+      display: visible ? '' : 'none',
+    });
+
     return (
       <div>
         <NotificationBar
           error={this.state.error}
           clearError={this.clearError} />
-        <div className='left-panel'>
-          <div className='table-panel'>
-            <Spreadsheet
-                {...this.state}
-                handleAction={store.dispatch} />
-          </div>
-          <div className='html-panel'>
-            <h3>HTML</h3>
-            <MonacoEditor
-              value={this.state.html}
-              language='html'
-              onSubmit={this.updateHTML} />
-          </div>
-          <div className='css-panel'>
-            <h3>CSS</h3>
-            <MonacoEditor
-              value={this.state.css}
-              language='css'
-              onSubmit={this.updateCSS} />
-          </div>
-          <div className='js-panel'>
-            <h3>JS</h3>
-            <MonacoEditor
-              value={this.state.js}
-              language='javascript'
-              onSubmit={this.updateJS} />
+        <div className='table-panel'>
+          <Spreadsheet
+              {...this.state}
+              handleAction={store.dispatch} />
+        </div>
+        <div className='editors'>
+          <TabChooser
+            tabs={TABS}
+            selectedTab={this.state.selectedTab}
+            onChange={this.changeTab} />
+          <div className='editor'>
+            <div className='panel html-panel' style={visStyle(this.state.selectedTab === 'HTML')}>
+              <MonacoEditor
+                value={this.state.html}
+                language='html'
+                onSubmit={this.updateHTML} />
+            </div>
+            <div className='panel css-panel' style={visStyle(this.state.selectedTab === 'CSS')}>
+              <MonacoEditor
+                value={this.state.css}
+                language='css'
+                onSubmit={this.updateCSS} />
+            </div>
+            <div className='panel js-panel' style={visStyle(this.state.selectedTab === 'JS')}>
+              <MonacoEditor
+                value={this.state.js}
+                language='javascript'
+                onSubmit={this.updateJS} />
+            </div>
           </div>
         </div>
         <div className='output-panel'>
@@ -98,6 +113,13 @@ class Root extends React.Component<{}, State> {
     store.dispatch({
       type: 'set-js',
       js,
+    });
+  }
+
+  changeTab(selectedTab: string) {
+    store.dispatch({
+      type: 'change-tab',
+      tab: selectedTab,
     });
   }
 }

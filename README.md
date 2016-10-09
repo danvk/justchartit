@@ -20,11 +20,14 @@ To-do:
   ✓ Create a preview panel
   ✓ Set up Monaco editor for HTML, CSS, JS
   ✓ Add in dygraphs typings
+  ✓ Make resizing work
   - Add some preset styles
   - Togglable panels (more space for JS / the table)
-  - Make resizing work
 - Sharing
+  ✓ Register justchart.it
   - Post anonymous gists which are loadable with bl.ocks.org
   - Load anonymous gists
   - GitHub OAuth for non-anonymous gists.
   - Use some sort of untrusted iframe for the preview
+  - Register justchartit.com
+  - Set up GitHub Pages hosting

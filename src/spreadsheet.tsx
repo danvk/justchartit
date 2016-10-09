@@ -31,6 +31,9 @@ export default class Spreadsheet extends React.Component<Props, State> {
       fixedRowsTop: 1,
       fixedColumnsLeft: 1,
       manualColumnFreeze: true,
+      manualColumnResize: true,
+      undo: true,
+
       afterChange: (change, source) => {
         if (source === 'loadData') return;
         this.props.handleAction({

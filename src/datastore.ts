@@ -11,6 +11,7 @@ export interface State {
   css: string;
   html: string;
   data: string[][];
+  selectedTab: string;
   error: string;
   shareLink: string;
 }
@@ -20,6 +21,7 @@ function createStore() {
   let css = defaults.CSS;
   let html = defaults.HTML;
   let data = defaults.data;
+  let selectedTab = 'JS';
 
   let error: string = null;
   let shareLink: string = null;
@@ -40,6 +42,11 @@ function createStore() {
 
       case 'set-html':
         setHTML(action as actions.SetHTML);
+        break;
+
+      case 'change-tab':
+        selectedTab = (action as actions.ChangeTab).tab;
+        stateChanged();
         break;
 
       case 'report-error':
@@ -107,6 +114,7 @@ function createStore() {
       css,
       js,
       data,
+      selectedTab,
       error,
       shareLink,
     };

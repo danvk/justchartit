@@ -1,3 +1,5 @@
+import * as _ from 'underscore';
+
 import { dedent } from './utils';
 
 export const HTML = dedent`
@@ -17,9 +19,18 @@ export const JS = dedent`
   });
 `.trim();
 
-export const data = [
+const numRows = 100;
+const numCols = 10;
+export const data = _.range(0, numRows).map(() => _.range(0, numCols).map(() => ''));
+
+const initVals = [
   ['Date', 'A', 'B'],
   ['2016/10/01', '12', '23'],
   ['2016/10/02', '14', '25'],
   ['2016/10/03', '10', '20'],
 ];
+initVals.forEach((row, i) => {
+  row.forEach((cell, j) => {
+    data[i][j] = cell;
+  });
+});

@@ -46,7 +46,7 @@ export default class MonacoEditor extends React.Component<Props, {}> {
 
   render(): JSX.Element {
     return (
-      <div className='monaco-editor' ref='editor'></div>
+      <div className='monaco-editor-holder' ref='editor'></div>
     );
   }
 
@@ -61,6 +61,7 @@ export default class MonacoEditor extends React.Component<Props, {}> {
         value: this.props.value || '',
         language: this.props.language,
         lineNumbers: 'on',
+        automaticLayout: true,
       });
 
       this.editor.onKeyDown(event => {
