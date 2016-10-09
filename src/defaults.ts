@@ -1,19 +1,21 @@
-export const HTML = `
+import { dedent } from './utils';
+
+export const HTML = dedent`
   <div id='graph'></div>
-`;
+`.trim();
 
-export const CSS = `
-#graph {
-  width: 600px;
-  height: 400px;
-}
-`;
+export const CSS = dedent`
+  #graph {
+    width: 600px;
+    height: 400px;
+  }
+`.trim();
 
-export const JS = `
-g = new Dygraph(document.getElementById('graph'), data, {
+export const JS = dedent`
+  g = new Dygraph(document.getElementById('graph'), data, {
 
-});
-`;
+  });
+`.trim();
 
 export const data = [
   ['Date', 'A', 'B'],

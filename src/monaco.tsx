@@ -16,35 +16,21 @@ let hasAddedLib = false;
 function maybeAddLibs() {
   if (hasAddedLib) return;
 
-  monaco.languages.typescript.javascriptDefaults.addExtraLib(dedent`
-    interface GradientStop {offset: number, color: string};
-    declare let gradient_stops: {[name: string]: GradientStop[]};
-    `, 'gradient.d.ts');
-
-  monaco.languages.typescript.javascriptDefaults.addExtraLib(dedent`
-    interface DrawingStyle {
-      fillColor?: string;
-      strokeColor?: string;
-      lineWidth?: number;
-      pointColor?: string;
-      pointRadius?: number;
+  fetch('dygraphs/dygraphs.d.ts')
+  .then(response => response.text())
+  .then(text => {
+    if (!hasAddedLib) {
+      console.log('adding...');
+      monaco.languages.typescript.javascriptDefaults.addExtraLib(
+      `
+      declare let data: string;
+      `);
+      monaco.languages.typescript.javascriptDefaults.addExtraLib(text, 'dygraphs.d.ts');
+      hasAddedLib = true;
     }
-    interface GeoJSONFeature {
-      id: string;
-      geometry: any;
-      properties: any;
-    }
-    type GradientStyleFn = (
-        feature: GeoJSONFeature,
-        gradients: {[name: string]: (v: number) => string}) => DrawingStyle;
-    interface StyleConfig {
-      style: GradientStyleFn;
-      selectedStyle?: GradientStyleFn;
-    };
-    declare let config: StyleConfig;
-    `, 'config.d.ts');
-
-  hasAddedLib = true;
+  }).catch(e => {
+    console.error(e);
+  });
 }
 
 export default class MonacoEditor extends React.Component<Props, {}> {

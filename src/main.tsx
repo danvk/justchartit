@@ -55,7 +55,7 @@ class Root extends React.Component<{}, State> {
             <h3>JS</h3>
             <MonacoEditor
               value={this.state.js}
-              language='typescript'
+              language='javascript'
               onSubmit={this.updateJS} />
           </div>
         </div>

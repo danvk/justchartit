@@ -21,6 +21,7 @@ To-do:
   ✓ Set up Monaco editor for HTML, CSS, JS
   - Add in dygraphs typings
   - Add some preset styles
+  - Togglable panels (more space for JS / the table)
 - Sharing
   - Post anonymous gists which are loadable with bl.ocks.org
   - Load anonymous gists
