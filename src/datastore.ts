@@ -11,7 +11,6 @@ export interface State {
   css: string;
   html: string;
   data: string[][];
-  selectedTab: string;
   error: string;
   shareLink: string;
 }
@@ -21,41 +20,18 @@ function createStore() {
   let css = defaults.CSS;
   let html = defaults.HTML;
   let data = defaults.data;
-  let selectedTab = 'JS';
 
   let error: string = null;
   let shareLink: string = null;
 
   function handleAction(action: Action) {
     switch (action.type) {
-      case 'set-cells':
-        setCells(action as actions.SetCells);
-        break;
-
-      case 'set-js':
-        setJS(action as actions.SetJS);
-        break;
-
-      case 'set-css':
-        setCSS(action as actions.SetCSS);
-        break;
-
-      case 'set-html':
-        setHTML(action as actions.SetHTML);
-        break;
-
-      case 'change-tab':
-        selectedTab = (action as actions.ChangeTab).tab;
-        stateChanged();
-        break;
-
-      case 'report-error':
-        reportError(action as actions.ReportError);
-        break;
-
-      case 'create-share-link':
-        createShareLink();
-        break;
+      case 'set-cells':         setCells(action); break;
+      case 'set-js':            setJS(action); break;
+      case 'set-css':           setCSS(action); break;
+      case 'set-html':          setHTML(action); break;
+      case 'report-error':      reportError(action); break;
+      case 'create-share-link': createShareLink(); break;
     }
   }
 
@@ -114,7 +90,6 @@ function createStore() {
       css,
       js,
       data,
-      selectedTab,
       error,
       shareLink,
     };

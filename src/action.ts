@@ -25,11 +25,6 @@ export interface SetHTML {
   html: string;
 }
 
-export interface ChangeTab {
-  type: 'change-tab';
-  tab: string;
-}
-
 export interface ReportError {
   type: 'report-error';
   error: Error;
@@ -43,7 +38,6 @@ type Action = SetCells |
               SetJS |
               SetCSS |
               SetHTML |
-              ChangeTab |
               ReportError |
               CreateShareLink;
 

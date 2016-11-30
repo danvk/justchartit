@@ -40,6 +40,14 @@ body {
   padding: 5px;
 }
 
+.react-tabs {
+  height: 100%;
+}
+
+.ReactTabs__TabPanel {
+  height: 100%;
+}
+
 .output-panel {
   position: absolute;
   left: 50%;

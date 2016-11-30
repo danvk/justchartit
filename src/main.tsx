@@ -24,7 +24,6 @@ class Root extends React.Component<{}, State> {
     this.clearError = this.clearError.bind(this);
     this.updateHTML = this.updateHTML.bind(this);
     this.updateCSS = this.updateCSS.bind(this);
-    this.changeTab = this.changeTab.bind(this);
   }
 
   render(): JSX.Element {
@@ -49,30 +48,34 @@ class Root extends React.Component<{}, State> {
               handleAction={store.dispatch} />
         </div>
         <div className='editors'>
-          <TabChooser
-            tabs={TABS}
-            selectedTab={this.state.selectedTab}
-            onChange={this.changeTab} />
-          <div className='editor'>
-            <div className='panel html-panel' style={visStyle(this.state.selectedTab === 'HTML')}>
-              <MonacoEditor
-                value={this.state.html}
-                language='html'
-                onSubmit={this.updateHTML} />
-            </div>
-            <div className='panel css-panel' style={visStyle(this.state.selectedTab === 'CSS')}>
+          <Tabs>
+            <TabList>
+              <Tab>HTML</Tab>
+              <Tab>CSS</Tab>
+              <Tab>JS</Tab>
+            </TabList>
+
+            <TabPanel>
+                <MonacoEditor
+                  value={this.state.html}
+                  language='html'
+                  onSubmit={this.updateHTML} />
+            </TabPanel>
+
+            <TabPanel>
               <MonacoEditor
                 value={this.state.css}
                 language='css'
                 onSubmit={this.updateCSS} />
-            </div>
-            <div className='panel js-panel' style={visStyle(this.state.selectedTab === 'JS')}>
+            </TabPanel>
+
+            <TabPanel>
               <MonacoEditor
                 value={this.state.js}
                 language='javascript'
                 onSubmit={this.updateJS} />
-            </div>
-          </div>
+            </TabPanel>
+          </Tabs>
         </div>
         <div className='output-panel'>
           <h3>Output</h3>
@@ -113,13 +116,6 @@ class Root extends React.Component<{}, State> {
     store.dispatch({
       type: 'set-js',
       js,
-    });
-  }
-
-  changeTab(selectedTab: string) {
-    store.dispatch({
-      type: 'change-tab',
-      tab: selectedTab,
     });
   }
 }
