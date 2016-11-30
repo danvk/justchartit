@@ -4,7 +4,7 @@
   "description": "Have data? Just chart it!",
   "main": "index.js",
   "scripts": {
-    "develop": "./develop.sh",
+    "develop": "webpack-dev-server --content-base static",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
