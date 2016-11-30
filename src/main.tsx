@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import createStore, {State} from './datastore';
 import MonacoEditor from './monaco';
 import NotificationBar from './notification-bar';
 import Preview from './preview';
 import Spreadsheet from './spreadsheet';
-import TabChooser from './tab-chooser';
 
 const rootEl = document.getElementById('root');
 const store = createStore();

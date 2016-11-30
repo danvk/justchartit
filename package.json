@@ -33,6 +33,17 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "@types/core-js": "^0.9.35",
+    "@types/dygraphs": "^1.1.1",
+    "@types/es6-collections": "^0.5.29",
+    "@types/es6-promise": "0.0.32",
+    "@types/google.visualization": "0.0.33",
+    "@types/handsontable": "^0.24.20",
+    "@types/react": "^0.14.51",
+    "@types/react-dom": "^0.14.19",
+    "@types/react-tabs": "^0.5.21",
+    "@types/underscore": "^1.7.36",
+    "@types/whatwg-fetch": "0.0.32",
     "awesome-typescript-loader": "^3.0.0-beta.3",
     "copy-webpack-plugin": "^3.0.1",
     "typescript": "^2.0.3",
