@@ -56,10 +56,10 @@ class Root extends React.Component<{}, State> {
             </TabList>
 
             <TabPanel>
-                <MonacoEditor
-                  value={this.state.html}
-                  language='html'
-                  onSubmit={this.updateHTML} />
+              <MonacoEditor
+                value={this.state.html}
+                language='html'
+                onSubmit={this.updateHTML} />
             </TabPanel>
 
             <TabPanel>
