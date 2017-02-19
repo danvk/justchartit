@@ -20,6 +20,11 @@ function createStore() {
   let css = defaults.CSS;
   let html = defaults.HTML;
   let data = defaults.data;
+  let editors = {
+    html: null as monaco.editor.IStandaloneCodeEditor,
+    js: null as monaco.editor.IStandaloneCodeEditor,
+    css: null as monaco.editor.IStandaloneCodeEditor,
+  };
 
   let error: string = null;
   let shareLink: string = null;
@@ -32,6 +37,9 @@ function createStore() {
       case 'set-html':          setHTML(action); break;
       case 'report-error':      reportError(action); break;
       case 'create-share-link': createShareLink(); break;
+      case 'run':               run(); break;
+      case 'stash-editor-reference':
+          editors[action.which] = action.editor;
     }
   }
 
@@ -67,6 +75,15 @@ function createStore() {
     } else {
       error = null;
     }
+    stateChanged();
+  }
+
+  function run() {
+    // Only editors which have been initialized can have unsaved changes.
+    if (editors.html) html = editors.html.getValue();
+    if (editors.js) js = editors.js.getValue();
+    if (editors.css) css = editors.css.getValue();
+    updateChart();
     stateChanged();
   }
 

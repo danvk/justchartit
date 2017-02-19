@@ -17,10 +17,10 @@ Got some data? Just chart it!
   - [ ] Remove non-en locales
 - UI
   - [ ] Put in Bootstrap and add a header / menu bar
-  - [ ] Add a "Run" button
   - [ ] Surface dygraphs errors/warnings in the UI
   - [ ] Add some preset styles
   - [ ] Links to examples, documentation
+  - [x] Add a "Run" button
 - Sharing
   - [ ] Post anonymous gists which are loadable with bl.ocks.org
   - [ ] Load anonymous gists

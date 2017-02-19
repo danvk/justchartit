@@ -34,11 +34,25 @@ export interface CreateShareLink {
   type: 'create-share-link';
 }
 
-type Action = SetCells |
-              SetJS |
+export interface Run {
+  type: 'run';
+}
+
+// This action gets fired once for each editor when the page loads.
+// It lets the data store figure out the contents of each editor when you click "Run".
+export interface StashEditorReference {
+  type: 'stash-editor-reference';
+  which: 'html' | 'js' | 'css';
+  editor: monaco.editor.IStandaloneCodeEditor;
+}
+
+type Action = CreateShareLink |
+              SetCells |
               SetCSS |
               SetHTML |
+              SetJS |
               ReportError |
-              CreateShareLink;
+              Run |
+              StashEditorReference ;
 
 export default Action;

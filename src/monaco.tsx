@@ -10,6 +10,7 @@ interface Props {
   value: string;
   language: string;
   onSubmit: (newValue: string) => any;
+  onReady?: (editor: monaco.editor.IStandaloneCodeEditor) => any;
 }
 
 let hasAddedLib = false;
@@ -69,6 +70,10 @@ export default class MonacoEditor extends React.Component<Props, {}> {
           this.handleSubmit();
         }
       });
+
+      if (this.props.onReady) {
+        this.props.onReady(this.editor);
+      }
     });
   }
 

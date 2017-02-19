@@ -18,12 +18,21 @@ const TABS = [
 ];
 
 class Root extends React.Component<{}, State> {
+  stashEditorReference: (type: 'html' | 'js' | 'css') =>
+      (editor: monaco.editor.IStandaloneCodeEditor) => any;
+
   constructor(props: {}) {
     super(props);
     this.state = store.getState();
     this.clearError = this.clearError.bind(this);
     this.updateHTML = this.updateHTML.bind(this);
     this.updateCSS = this.updateCSS.bind(this);
+    this.run = this.run.bind(this);
+    this.stashEditorReference = which => editor => store.dispatch({
+      type: 'stash-editor-reference',
+      which,
+      editor,
+    })
   }
 
   render(): JSX.Element {
@@ -42,6 +51,9 @@ class Root extends React.Component<{}, State> {
         <NotificationBar
           error={this.state.error}
           clearError={this.clearError} />
+        <div className='header'>
+          <button onClick={this.run}>Run</button>
+        </div>
         <div className='table-panel'>
           <Spreadsheet
               {...this.state}
@@ -59,6 +71,7 @@ class Root extends React.Component<{}, State> {
               <MonacoEditor
                 value={this.state.html}
                 language='html'
+                onReady={this.stashEditorReference('html')}
                 onSubmit={this.updateHTML} />
             </TabPanel>
 
@@ -66,6 +79,7 @@ class Root extends React.Component<{}, State> {
               <MonacoEditor
                 value={this.state.css}
                 language='css'
+                onReady={this.stashEditorReference('css')}
                 onSubmit={this.updateCSS} />
             </TabPanel>
 
@@ -73,6 +87,7 @@ class Root extends React.Component<{}, State> {
               <MonacoEditor
                 value={this.state.js}
                 language='javascript'
+                onReady={this.stashEditorReference('js')}
                 onSubmit={this.updateJS} />
             </TabPanel>
           </Tabs>
@@ -117,6 +132,10 @@ class Root extends React.Component<{}, State> {
       type: 'set-js',
       js,
     });
+  }
+
+  run() {
+    store.dispatch({ type: 'run' });
   }
 }
 
