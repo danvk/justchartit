@@ -62,10 +62,18 @@ class Root extends React.Component<{}, State> {
         <div className='editors'>
           <Tabs>
             <TabList>
+              <Tab>JS</Tab>
               <Tab>HTML</Tab>
               <Tab>CSS</Tab>
-              <Tab>JS</Tab>
             </TabList>
+
+            <TabPanel>
+              <MonacoEditor
+                value={this.state.js}
+                language='javascript'
+                onReady={this.stashEditorReference('js')}
+                onSubmit={this.updateJS} />
+            </TabPanel>
 
             <TabPanel>
               <MonacoEditor
@@ -81,14 +89,6 @@ class Root extends React.Component<{}, State> {
                 language='css'
                 onReady={this.stashEditorReference('css')}
                 onSubmit={this.updateCSS} />
-            </TabPanel>
-
-            <TabPanel>
-              <MonacoEditor
-                value={this.state.js}
-                language='javascript'
-                onReady={this.stashEditorReference('js')}
-                onSubmit={this.updateJS} />
             </TabPanel>
           </Tabs>
         </div>
