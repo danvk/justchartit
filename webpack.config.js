@@ -39,7 +39,7 @@ module.exports = {
       from: 'node_modules/handsontable/dist',
       to: 'handsontable',
     }, {
-      from: 'node_modules/dygraphs/dist/*min*',
+      from: 'node_modules/dygraphs/dist/dygraph.*',
       to: 'dygraphs',
       flatten: true,
     }, {
