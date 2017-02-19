@@ -21,6 +21,13 @@ export interface Gist {
   updated_at: string;
 }
 
+interface ParsedData {
+  html: string;
+  js: string;
+  css: string;
+  data: string[][];
+}
+
 // Remove the bits needed to make gists stand-alone for bl.ocks.org.
 function stripHeader(html: string): string {
   // TODO: look up the right way to match multiline regexes.
@@ -54,7 +61,7 @@ export function validateGist(gist: Gist): (string|null) {
   }
 }
 
-export function parseGist(gist: Gist) {
+export function parseGist(gist: Gist): ParsedData {
   const html = stripHeader(gist.files['index.html'].content);
   const js = gist.files['index.js'].content;
   const css = gist.files['index.css'].content;
@@ -62,4 +69,33 @@ export function parseGist(gist: Gist) {
   const data = gist.files['data.tsv'].content.split('\n').map(line => line.split('\t'));
 
   return { html, js, css, data };
+}
+
+/** Load a gist object using the GitHub Gist API. */
+export async function getGist(id: string): Promise<Gist> {
+  return fetch('get-gist.json')
+    .then(response => response.json() as Promise<Gist>);
+}
+
+/** Save a gist using the GitHub Gist API. The Gist ID can be retrieved from the result. */
+export async function postGist(data: ParsedData): Promise<Gist> {
+  const response = await fetch('https://api.github.com/gists', {
+    method: 'POST',
+    body: JSON.stringify({
+      description: 'Just Chart It!',
+      public: true,
+      files: {
+        'index.html': addHeader(data.html),
+        'index.css': data.css,
+        'index.js': data.js,
+        // TODO: be more careful about TSV conversion.
+        'data.tsv': data.data.map(row => row.join('\t')).join('\n'),
+      },
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+  });
+
+  return response.json();
 }

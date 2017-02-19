@@ -28,6 +28,7 @@ class Root extends React.Component<{}, State> {
     this.updateHTML = this.updateHTML.bind(this);
     this.updateCSS = this.updateCSS.bind(this);
     this.run = this.run.bind(this);
+    this.share = this.share.bind(this);
     this.stashEditorReference = which => editor => store.dispatch({
       type: 'stash-editor-reference',
       which,
@@ -36,16 +37,6 @@ class Root extends React.Component<{}, State> {
   }
 
   render(): JSX.Element {
-    const handleAction = store.dispatch.bind(store);
-
-    const shareLink = () => {
-      store.dispatch({ type: 'create-share-link' });
-    };
-
-    const visStyle = (visible: boolean) => ({
-      display: visible ? '' : 'none',
-    });
-
     return (
       <div>
         <NotificationBar
@@ -53,6 +44,7 @@ class Root extends React.Component<{}, State> {
           clearError={this.clearError} />
         <div className='header'>
           <button onClick={this.run}>Run</button>
+          <button onClick={this.share}>Share</button>
         </div>
         <div className='table-panel'>
           <Spreadsheet
@@ -136,6 +128,10 @@ class Root extends React.Component<{}, State> {
 
   run() {
     store.dispatch({ type: 'run' });
+  }
+
+  share() {
+    store.dispatch({ type: 'create-share-link' });
   }
 }
 

@@ -84,6 +84,15 @@ function createStore() {
   }
 
   function createShareLink() {
+    gist.postGist({ html, js, css, data }).then(gistData => {
+      shareLink = `https://bl.ocks.org/${gistData.id}`;
+      window.location.hash = gistData.id;
+      stateChanged();
+    }).catch(e => {
+      console.error(e);
+      error = `Unable to save gist`;
+      stateChanged();
+    });
   }
 
   function initialize() {
@@ -91,8 +100,7 @@ function createStore() {
     if (!hash) return;
 
     const gistId = hash.slice(1);  // remove the '#'.
-    fetch('get-gist.json')
-      .then(response => response.json<gist.Gist>())
+    gist.getGist(gistId)
       .then(loadFromGistObject)
       .catch(e => {
         console.error(e);
