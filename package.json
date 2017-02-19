@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/danvk/justchartit#readme",
   "dependencies": {
-    "dygraphs": "git+https://git@github.com/danvk/dygraphs.git#2.0.0-dev1",
+    "dygraphs": "^2.0.0",
     "enhanced-resolve": "^2.3.0",
     "handsontable": "^0.28.3",
     "monaco": "^1.201608162214.0",
@@ -33,10 +33,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "@types/core-js": "^0.9.35",
     "@types/dygraphs": "^1.1.1",
-    "@types/es6-collections": "^0.5.29",
-    "@types/es6-promise": "0.0.32",
     "@types/google.visualization": "0.0.33",
     "@types/handsontable": "^0.24.20",
     "@types/react": "^0.14.51",
