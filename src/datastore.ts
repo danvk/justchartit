@@ -3,6 +3,7 @@ import * as _ from 'underscore';
 import Action, * as actions from './action';
 
 import * as defaults from './defaults';
+import * as gist from './gist';
 import * as utils from './utils';
 
 /** This is the state exported by this store via store.getState(). */
@@ -47,25 +48,21 @@ function createStore() {
     for (const [row, col, , newValue] of action.edits) {
       data[row][col] = newValue;
     }
-    updateChart();
     stateChanged();
   }
 
   function setCSS(action: actions.SetCSS) {
     css = action.css;
-    updateChart();
     stateChanged();
   }
 
   function setJS(action: actions.SetJS) {
     js = action.js;
-    updateChart();
     stateChanged();
   }
 
   function setHTML(action: actions.SetHTML) {
     html = action.html;
-    updateChart();
     stateChanged();
   }
 
@@ -83,17 +80,41 @@ function createStore() {
     if (editors.html) html = editors.html.getValue();
     if (editors.js) js = editors.js.getValue();
     if (editors.css) css = editors.css.getValue();
-    updateChart();
     stateChanged();
   }
 
   function createShareLink() {
   }
 
-  function updateChart() {
+  function initialize() {
+    const hash = window.location.hash;
+    if (!hash) return;
+
+    const gistId = hash.slice(1);  // remove the '#'.
+    fetch('get-gist.json')
+      .then(response => response.json<gist.Gist>())
+      .then(loadFromGistObject)
+      .catch(e => {
+        console.error(e);
+        error = `Unable to load gist ${gistId}`;
+        stateChanged();
+      })
   }
 
-  function initialize() {
+  function loadFromGistObject(gistData: gist.Gist) {
+    error = gist.validateGist(gistData);
+    if (error) {
+      stateChanged();
+      return;
+    }
+
+    const parsed = gist.parseGist(gistData);
+    html = parsed.html;
+    css = parsed.css;
+    js = parsed.js;
+    data = parsed.data;
+
+    stateChanged();
   }
 
   const subscribers = [] as (() => any)[];

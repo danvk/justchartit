@@ -8,6 +8,16 @@ body {
   overflow: auto;
 }
 
+.error {
+  z-index: 1;
+  position: absolute;
+  background: red;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
+  padding: 5px;
+}
+
 .editor, .panel {
   position: relative;
   height: 100%;
