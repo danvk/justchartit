@@ -31,7 +31,9 @@ interface ParsedData {
 // Remove the bits needed to make gists stand-alone for bl.ocks.org.
 function stripHeader(html: string): string {
   // TODO: look up the right way to match multiline regexes.
-  return html.replace(/<!-- HEADER -->(.|\n)*<!-- \/HEADER -->\n\n/, '');
+  return html
+      .replace(/<!-- HEADER -->(.|\n)*<!-- \/HEADER -->\n*/, '')
+      .replace(/\n*<!-- FOOTER -->(.|\n)*<!-- \/FOOTER -->/, '');
 }
 
 function addHeader(html: string): string {
@@ -40,10 +42,14 @@ function addHeader(html: string): string {
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.min.css' />
 
     <link rel='stylesheet' href='index.css' />
-    <script src='index.js'></script>
-    <!-- \/HEADER -->
+    data = 'data.tsv';
+    <!-- /HEADER -->
 
-    ${html}`;
+    ${html}
+
+    <!-- FOOTER -->
+    <script src='index.js'></script>
+    <!-- /FOOTER -->`;
 }
 
 /**
@@ -73,7 +79,7 @@ export function parseGist(gist: Gist): ParsedData {
 
 /** Load a gist object using the GitHub Gist API. */
 export async function getGist(id: string): Promise<Gist> {
-  return fetch('get-gist.json')
+  return fetch(`https://api.github.com/gists/${id}`)
     .then(response => response.json() as Promise<Gist>);
 }
 
@@ -91,10 +97,10 @@ export async function postGist(data: ParsedData): Promise<Gist> {
         // TODO: be more careful about TSV conversion.
         'data.tsv': data.data.map(row => row.join('\t')).join('\n'),
       },
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
+    }),
+    headers: {
+      'Content-type': 'application/json',
+    }
   });
 
   return response.json();
