@@ -41,3 +41,21 @@ export function dedent(strings: TemplateStringsArray, ...values: string[]) {
   fullString = indent > 0 ? fullString.replace(regexp, '') : fullString;
   return fullString;
 }
+
+/** Convert the cells to a TSV string, omitting empty rows/cols at the bottom/right. */
+export function formatData(cells: string[][]): string {
+  let maxCol = 0;
+  let maxRow = 0;
+  cells.forEach((row, i) => {
+    row.forEach((cell, j) => {
+      if (cell) {
+        maxRow = Math.max(i, maxRow);
+        maxCol = Math.max(j, maxCol);
+      }
+    });
+  });
+
+  return _.range(0, maxRow + 1).map(
+    row => _.range(0, maxCol + 1).map(col => cells[row][col]).join(','))
+    .join('\n');
+}

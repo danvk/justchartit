@@ -43,6 +43,7 @@ class Root extends React.Component<{}, State> {
           error={this.state.error}
           clearError={this.clearError} />
         <div className='header'>
+          <span className='title'>Just Chart It!</span>
           <button onClick={this.run}>Run</button>
           <button onClick={this.share}>Share</button>
         </div>

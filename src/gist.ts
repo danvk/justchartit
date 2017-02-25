@@ -1,4 +1,4 @@
-import { dedent } from './utils';
+import { dedent, formatData } from './utils';
 
 export interface GistFile {
   content: string;
@@ -37,12 +37,15 @@ function stripHeader(html: string): string {
 }
 
 function addHeader(html: string): string {
-  return dedent`<!-- HEADER -->
+  return dedent`
+    <!-- HEADER -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.min.js'></script>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.min.css' />
 
     <link rel='stylesheet' href='index.css' />
+    <script type='text/javascript'>
     data = 'data.tsv';
+    </script>
     <!-- /HEADER -->
 
     ${html}
@@ -91,11 +94,11 @@ export async function postGist(data: ParsedData): Promise<Gist> {
       description: 'Just Chart It!',
       public: true,
       files: {
-        'index.html': addHeader(data.html),
-        'index.css': data.css,
-        'index.js': data.js,
+        'index.html': { content: addHeader(data.html) },
+        'index.css': { content: data.css },
+        'index.js': { content: data.js },
         // TODO: be more careful about TSV conversion.
-        'data.tsv': data.data.map(row => row.join('\t')).join('\n'),
+        'data.tsv': { content: formatData(data.data) },
       },
     }),
     headers: {
