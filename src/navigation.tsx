@@ -4,7 +4,26 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
+import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
+
+import {spacing, typography, zIndex} from 'material-ui/styles';
+import {cyan500} from 'material-ui/styles/colors';
+
+const styles = {
+  logo: {
+    cursor: 'pointer',
+    fontSize: 24,
+    color: typography.textFullWhite,
+    lineHeight: `${spacing.desktopKeylineIncrement}px`,
+    fontWeight: typography.fontWeightLight,
+    backgroundColor: cyan500,
+    paddingLeft: spacing.desktopGutter,
+    marginBottom: 8,
+  },
+};
 
 interface Props {
   onRun(): any;
@@ -34,12 +53,28 @@ class Navigation extends React.Component<Props, State> {
             <RaisedButton onClick={this.props.onShare} label='Share' />
           </ToolbarGroup>
         </AppBar>
-        <Drawer open={this.state.drawerOpen} docked={false} onRequestChange={this.setDrawerOpen}>
-          <MenuItem>dygraphs</MenuItem>
-          <MenuItem>Tutorial</MenuItem>
-          <MenuItem>Options Reference</MenuItem>
-          <MenuItem>API Reference</MenuItem>
-          <MenuItem>Stack Overflow</MenuItem>
+        <Drawer
+            open={this.state.drawerOpen}
+            onRequestChange={this.setDrawerOpen}
+            docked={false}
+        >
+          <div style={styles.logo}>
+            Just Chart It!
+          </div>
+          <MenuItem rightIcon={<ArrowDropRight/>} menuItems={[
+            <MenuItem insetChildren={true} checked={true}>Default</MenuItem>,
+            <MenuItem insetChildren={true}>JS primary</MenuItem>
+          ]}>Layout</MenuItem>
+          <Divider />
+          <MenuItem disabled={true}>dygraphs resources</MenuItem>
+          <MenuItem insetChildren={true}>Options Reference</MenuItem>
+          <MenuItem insetChildren={true}>API Reference</MenuItem>
+          <MenuItem insetChildren={true}>Stack Overflow</MenuItem>
+          <MenuItem insetChildren={true} href='http://dygraphs.com/'>Web Site</MenuItem>
+          <MenuItem insetChildren={true}>Blog</MenuItem>
+          <MenuItem insetChildren={true}>Tutorial</MenuItem>
+          <Divider />
+          <MenuItem>About Just Chart It</MenuItem>
         </Drawer>
       </div>
     );
