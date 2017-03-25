@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import * as _ from 'underscore';
 
 import Action, {Edit} from './action';
-import {State as DataStoreState} from './datastore';
+import {AppState as DataStoreState} from './datastore';
 import * as utils from './utils';
 
 // import * as handsontable from 'handsontable';

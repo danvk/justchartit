@@ -2,14 +2,17 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
+import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
-import createStore, {State} from './datastore';
+import createStore, {AppState} from './datastore';
 import MonacoEditor from './monaco';
 import NotificationBar from './notification-bar';
 import Preview from './preview';
 import Spreadsheet from './spreadsheet';
+import Navigation from './navigation';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -25,7 +28,7 @@ const TABS = [
   'JS',
 ];
 
-class Root extends React.Component<{}, State> {
+class Root extends React.Component<{}, AppState> {
   stashEditorReference: (type: 'html' | 'js' | 'css') =>
       (editor: monaco.editor.IStandaloneCodeEditor) => any;
 
@@ -50,11 +53,9 @@ class Root extends React.Component<{}, State> {
         <NotificationBar
           error={this.state.error}
           clearError={this.clearError} />
-        <div className='header'>
-          <span className='title'>Just Chart It!</span>
-          <RaisedButton onClick={this.run} label='Run' />
-          <RaisedButton onClick={this.share} label='Share' />
-        </div>
+
+        <Navigation onRun={this.run} onShare={this.share} />
+
         <div className='table-panel'>
           <Spreadsheet
               {...this.state}
@@ -94,7 +95,6 @@ class Root extends React.Component<{}, State> {
           </Tabs>
         </div>
         <div className='output-panel'>
-          <h3>Output</h3>
           <Preview {...this.state} />
         </div>
       </div>

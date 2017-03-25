@@ -7,7 +7,7 @@ import * as gist from './gist';
 import * as utils from './utils';
 
 /** This is the state exported by this store via store.getState(). */
-export interface State {
+export interface AppState {
   js: string;
   css: string;
   html: string;
@@ -130,7 +130,7 @@ function createStore() {
     subscribers.forEach(fn => fn());
   }
 
-  function getState(): State {
+  function getState(): AppState {
     return {
       html,
       css,

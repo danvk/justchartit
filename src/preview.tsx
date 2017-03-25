@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'underscore';
 
-import {State as DataStoreState} from './datastore';
+import {AppState as DataStoreState} from './datastore';
 import * as utils from './utils';
 
 interface Props extends DataStoreState {
