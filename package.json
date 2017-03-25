@@ -21,15 +21,19 @@
   },
   "homepage": "https://github.com/danvk/justchartit#readme",
   "dependencies": {
+    "@types/material-ui": "^0.16.59",
+    "@types/react-tap-event-plugin": "^0.0.30",
     "dygraphs": "^2.0.0",
     "enhanced-resolve": "^2.3.0",
     "handsontable": "^0.28.3",
+    "material-ui": "^0.17.1",
     "monaco": "^1.201608162214.0",
     "monaco-editor": "^0.7.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-dropzone": "^3.7.3",
     "react-tabs": "^0.8.2",
+    "react-tap-event-plugin": "^2.0.1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

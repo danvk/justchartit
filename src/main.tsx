@@ -2,11 +2,19 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+
 import createStore, {State} from './datastore';
 import MonacoEditor from './monaco';
 import NotificationBar from './notification-bar';
 import Preview from './preview';
 import Spreadsheet from './spreadsheet';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+import * as injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 const rootEl = document.getElementById('root');
 const store = createStore();
@@ -44,8 +52,8 @@ class Root extends React.Component<{}, State> {
           clearError={this.clearError} />
         <div className='header'>
           <span className='title'>Just Chart It!</span>
-          <button onClick={this.run}>Run</button>
-          <button onClick={this.share}>Share</button>
+          <RaisedButton onClick={this.run} label='Run' />
+          <RaisedButton onClick={this.share} label='Share' />
         </div>
         <div className='table-panel'>
           <Spreadsheet
@@ -136,4 +144,10 @@ class Root extends React.Component<{}, State> {
   }
 }
 
-ReactDOM.render(<Root />, rootEl);
+const App = () => (
+  <MuiThemeProvider>
+    <Root />
+  </MuiThemeProvider>
+);
+
+ReactDOM.render(<App />, rootEl);

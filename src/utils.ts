@@ -56,6 +56,6 @@ export function formatData(cells: string[][]): string {
   });
 
   return _.range(0, maxRow + 1).map(
-    row => _.range(0, maxCol + 1).map(col => cells[row][col]).join(','))
+    row => _.range(0, maxCol + 1).map(col => cells[row][col]).join('\t'))
     .join('\n');
 }
