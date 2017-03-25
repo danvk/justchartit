@@ -12,6 +12,7 @@ Got some data? Just chart it!
 
 - Infrastructure
   - [ ] Set strictNullChecks
+  - [ ] Set up GitHub Pages hosting
 - Handsontable
   - [ ] Support drag & drop import of [CT]SV files
   - [ ] Remove non-en locales
@@ -26,4 +27,3 @@ Got some data? Just chart it!
   - [ ] Load anonymous gists
   - [ ] GitHub OAuth for non-anonymous gists.
   - [ ] Use some sort of untrusted iframe for the preview
-  - [ ] Set up GitHub Pages hosting
