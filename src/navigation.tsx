@@ -12,6 +12,8 @@ import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 import {spacing, typography, zIndex} from 'material-ui/styles';
 import {cyan500} from 'material-ui/styles/colors';
 
+import { Layout } from './action';
+
 const styles = {
   logo: {
     cursor: 'pointer',
@@ -28,6 +30,8 @@ const styles = {
 interface Props {
   onRun(): any;
   onShare(): any;
+  onSetLayout(layout: Layout): any;
+  layout: Layout;
 }
 
 interface State {
@@ -45,6 +49,7 @@ class Navigation extends React.Component<Props, State> {
   }
 
   render() {
+    const { layout, onSetLayout } = this.props;
     return (
       <div>
         <AppBar title='Just Chart It!' onLeftIconButtonTouchTap={this.openDrawer}>
@@ -62,8 +67,8 @@ class Navigation extends React.Component<Props, State> {
             Just Chart It!
           </div>
           <MenuItem rightIcon={<ArrowDropRight/>} menuItems={[
-            <MenuItem insetChildren={true} checked={true}>Default</MenuItem>,
-            <MenuItem insetChildren={true}>JS primary</MenuItem>
+            <MenuItem insetChildren={true} checked={layout === 'default'} onTouchTap={() => onSetLayout('default')}>Default</MenuItem>,
+            <MenuItem insetChildren={true} checked={layout === 'js-primary'} onTouchTap={() => onSetLayout('js-primary')}>JS primary</MenuItem>
           ]}>Layout</MenuItem>
           <Divider />
           <MenuItem disabled={true}>dygraphs resources</MenuItem>

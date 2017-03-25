@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
+import * as actions from './action';
 import createStore, {AppState} from './datastore';
 import MonacoEditor from './monaco';
 import NotificationBar from './notification-bar';
@@ -38,6 +39,7 @@ class Root extends React.Component<{}, AppState> {
     this.clearError = this.clearError.bind(this);
     this.updateHTML = this.updateHTML.bind(this);
     this.updateCSS = this.updateCSS.bind(this);
+    this.setLayout = this.setLayout.bind(this);
     this.run = this.run.bind(this);
     this.share = this.share.bind(this);
     this.stashEditorReference = which => editor => store.dispatch({
@@ -48,20 +50,25 @@ class Root extends React.Component<{}, AppState> {
   }
 
   render(): JSX.Element {
+    const { layout } = this.state;
     return (
       <div>
         <NotificationBar
           error={this.state.error}
           clearError={this.clearError} />
 
-        <Navigation onRun={this.run} onShare={this.share} />
+        <Navigation
+            onRun={this.run}
+            onShare={this.share}
+            onSetLayout={this.setLayout}
+            layout={this.state.layout} />
 
-        <div className='table-panel'>
+        <div className={layout === 'default' ? 'table-panel' : 'editors'}>
           <Spreadsheet
               {...this.state}
               handleAction={store.dispatch} />
         </div>
-        <div className='editors'>
+        <div className={layout === 'default' ? 'editors' : 'table-layout'}>
           <Tabs>
             <TabList>
               <Tab>JS</Tab>
@@ -132,6 +139,13 @@ class Root extends React.Component<{}, AppState> {
     store.dispatch({
       type: 'set-js',
       js,
+    });
+  }
+
+  setLayout(layout: actions.Layout) {
+    store.dispatch({
+      type: 'set-layout',
+      layout,
     });
   }
 

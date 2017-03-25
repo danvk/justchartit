@@ -4,6 +4,8 @@
 
 export type Edit = [number, number, string, string];  // row, col, old value, new value
 
+export type Layout = 'default' | 'js-primary';
+
 export interface SetCells {
   type: 'set-cells',
   source: string;  // e.g. autofill, paste, edit, ...
@@ -38,6 +40,11 @@ export interface Run {
   type: 'run';
 }
 
+export interface SetLayout {
+  type: 'set-layout';
+  layout: Layout;
+}
+
 // This action gets fired once for each editor when the page loads.
 // It lets the data store figure out the contents of each editor when you click "Run".
 export interface StashEditorReference {
@@ -51,6 +58,7 @@ type Action = CreateShareLink |
               SetCSS |
               SetHTML |
               SetJS |
+              SetLayout |
               ReportError |
               Run |
               StashEditorReference ;

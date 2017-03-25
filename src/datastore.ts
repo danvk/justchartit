@@ -14,6 +14,7 @@ export interface AppState {
   data: string[][];
   error: string;
   shareLink: string;
+  layout: actions.Layout;
 }
 
 function createStore() {
@@ -29,6 +30,7 @@ function createStore() {
 
   let error: string = null;
   let shareLink: string = null;
+  let layout: actions.Layout = 'default';
 
   function handleAction(action: Action) {
     switch (action.type) {
@@ -38,6 +40,7 @@ function createStore() {
       case 'set-html':          setHTML(action); break;
       case 'report-error':      reportError(action); break;
       case 'create-share-link': createShareLink(); break;
+      case 'set-layout':        layout = action.layout; stateChanged(); break;
       case 'run':               run(); break;
       case 'stash-editor-reference':
           editors[action.which] = action.editor;
@@ -136,6 +139,7 @@ function createStore() {
       css,
       js,
       data,
+      layout,
       error,
       shareLink,
     };
