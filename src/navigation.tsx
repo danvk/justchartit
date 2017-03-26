@@ -8,6 +8,8 @@ import Divider from 'material-ui/Divider';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import Popover from 'material-ui/Popover';
 
 import {spacing, typography, zIndex} from 'material-ui/styles';
 import {cyan500} from 'material-ui/styles/colors';
@@ -54,6 +56,12 @@ class Navigation extends React.Component<Props, State> {
       <div>
         <AppBar title='Just Chart It!' onLeftIconButtonTouchTap={this.openDrawer}>
           <ToolbarGroup firstChild={true}>
+            <Menu>
+              <MenuItem rightIcon={<ArrowDropRight/>} menuItems={[
+              <MenuItem insetChildren={true} checked={layout === 'default'} onTouchTap={() => onSetLayout('default')}>Default</MenuItem>,
+              <MenuItem insetChildren={true} checked={layout === 'js-primary'} onTouchTap={() => onSetLayout('js-primary')}>JS primary</MenuItem>
+            ]}>Layout</MenuItem>
+            </Menu>
             <RaisedButton onClick={this.props.onRun} label='Run' />
             <RaisedButton onClick={this.props.onShare} label='Share' />
           </ToolbarGroup>
@@ -66,10 +74,7 @@ class Navigation extends React.Component<Props, State> {
           <div style={styles.logo}>
             Just Chart It!
           </div>
-          <MenuItem rightIcon={<ArrowDropRight/>} menuItems={[
-            <MenuItem insetChildren={true} checked={layout === 'default'} onTouchTap={() => onSetLayout('default')}>Default</MenuItem>,
-            <MenuItem insetChildren={true} checked={layout === 'js-primary'} onTouchTap={() => onSetLayout('js-primary')}>JS primary</MenuItem>
-          ]}>Layout</MenuItem>
+
           <Divider />
           <MenuItem disabled={true}>dygraphs resources</MenuItem>
           <MenuItem insetChildren={true}>Options Reference</MenuItem>
@@ -91,6 +96,10 @@ class Navigation extends React.Component<Props, State> {
 
   openDrawer() {
     this.setDrawerOpen(true);
+  }
+
+  onChangeLayout(e: any, i: number, value: Layout) {
+    this.props.onSetLayout(value);
   }
 }
 
