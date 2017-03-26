@@ -52,7 +52,7 @@ class Root extends React.Component<{}, AppState> {
   render(): JSX.Element {
     const { layout } = this.state;
     return (
-      <div>
+      <div className={`layout-${layout}`}>
         <NotificationBar
           error={this.state.error}
           clearError={this.clearError} />
@@ -63,12 +63,13 @@ class Root extends React.Component<{}, AppState> {
             onSetLayout={this.setLayout}
             layout={this.state.layout} />
 
-        <div className={layout === 'default' ? 'table-panel' : 'editors'}>
+        <div className='table-panel'>
           <Spreadsheet
               {...this.state}
               handleAction={store.dispatch} />
         </div>
-        <div className={layout === 'default' ? 'editors' : 'table-layout'}>
+
+        <div className='editors-panel'>
           <Tabs>
             <TabList>
               <Tab>JS</Tab>

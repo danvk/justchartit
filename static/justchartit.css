@@ -31,24 +31,21 @@ body {
 
 .table-panel {
   position: absolute;
-  left: 0;
-  top: 64px;
-  bottom: 0;
-  right: 50%;
-  padding: 5px;
   overflow: hidden;
 
   font-family: arial, sans-serif;
   font-size: small;
 }
 
-.editors {
+.editors-panel {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  right: 0;
-  bottom: 0;
   padding: 5px;
+}
+
+.output-panel {
+  position: absolute;
+  padding: 5px;
+  overflow: auto;
 }
 
 .react-tabs {
@@ -60,15 +57,29 @@ body {
 }
 
 .output-panel {
-  position: absolute;
   left: 50%;
   top: 64px;
   right: 0;
   bottom: 50%;
-  padding: 5px;
-  overflow: auto;
 }
 
 .tab-chooser > * {
   margin: auto 5px;
+}
+
+.layout-default .table-panel,
+.layout-js-primary .editors-panel {
+  left: 0;
+  top: 64px;
+  bottom: 0;
+  right: 50%;
+  padding: 5px;
+}
+
+.layout-default .editors-panel,
+.layout-js-primary .table-panel {
+  left: 50%;
+  top: 50%;
+  right: 0;
+  bottom: 0;
 }
