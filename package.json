@@ -32,7 +32,6 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-dropzone": "^3.7.3",
-    "react-tabs": "^0.8.2",
     "react-tap-event-plugin": "^2.0.1",
     "underscore": "^1.8.3"
   },

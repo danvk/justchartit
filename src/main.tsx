@@ -1,11 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {Tabs, Tab} from 'material-ui/Tabs';
+import { lightBaseTheme } from 'material-ui/styles';
 
 import * as actions from './action';
 import createStore, {AppState} from './datastore';
@@ -28,6 +29,32 @@ const TABS = [
   'CSS',
   'JS',
 ];
+
+// See https://github.com/callemall/material-ui/issues/2085
+class TabTemplate extends React.Component<any, any> {
+  render() {
+    if (!this.props.selected) {
+      return null;
+    }
+
+    return this.props.children;
+  }
+}
+
+const STYLES = {
+  root: {
+    height: '100%',
+  },
+  container: {
+    height: '100%',
+  },
+  tabItemContainerStyle: {
+    backgroundColor: lightBaseTheme.palette.accent2Color,
+  },
+  tabItem: {
+    color: lightBaseTheme.palette.textColor,
+  }
+};
 
 class Root extends React.Component<{}, AppState> {
   stashEditorReference: (type: 'html' | 'js' | 'css') =>
@@ -70,36 +97,36 @@ class Root extends React.Component<{}, AppState> {
         </div>
 
         <div className='editors-panel'>
-          <Tabs>
-            <TabList>
-              <Tab>JS</Tab>
-              <Tab>HTML</Tab>
-              <Tab>CSS</Tab>
-            </TabList>
+          <Tabs
+              tabItemContainerStyle={STYLES.tabItemContainerStyle}
+              style={STYLES.root}
+              contentContainerStyle={STYLES.container}
+              tabTemplate={TabTemplate} >
+            <Tab label='JS' className='tab' style={STYLES.tabItem}>
+              <div style={{height: '100%'}}>
+                <MonacoEditor
+                  value={this.state.js}
+                  language='javascript'
+                  onReady={this.stashEditorReference('js')}
+                  onSubmit={this.updateJS} />
+              </div>
+            </Tab>
 
-            <TabPanel>
-              <MonacoEditor
-                value={this.state.js}
-                language='javascript'
-                onReady={this.stashEditorReference('js')}
-                onSubmit={this.updateJS} />
-            </TabPanel>
-
-            <TabPanel>
+            <Tab label='HTML' style={STYLES.tabItem}>
               <MonacoEditor
                 value={this.state.html}
                 language='html'
                 onReady={this.stashEditorReference('html')}
                 onSubmit={this.updateHTML} />
-            </TabPanel>
+            </Tab>
 
-            <TabPanel>
+            <Tab label='CSS' style={STYLES.tabItem}>
               <MonacoEditor
                 value={this.state.css}
                 language='css'
                 onReady={this.stashEditorReference('css')}
                 onSubmit={this.updateCSS} />
-            </TabPanel>
+            </Tab>
           </Tabs>
         </div>
         <div className='output-panel'>

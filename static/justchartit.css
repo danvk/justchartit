@@ -48,11 +48,7 @@ body {
   overflow: auto;
 }
 
-.react-tabs {
-  height: 100%;
-}
-
-.ReactTabs__TabPanel {
+.tabs, .tab {
   height: 100%;
 }
 
@@ -61,10 +57,6 @@ body {
   top: 64px;
   right: 0;
   bottom: 50%;
-}
-
-.tab-chooser > * {
-  margin: auto 5px;
 }
 
 .layout-default .table-panel,
