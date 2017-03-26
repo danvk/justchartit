@@ -10,22 +10,31 @@ interface Props extends DataStoreState {
 export default class Preview extends React.Component<Props, {}> {
   render(): JSX.Element {
     return (
-      <div>
-        <style type='text/css'>{this.props.css}</style>
-        <div dangerouslySetInnerHTML={{__html: this.props.html}} />
-      </div>
+      <iframe
+          ref='frame'
+          src='runner.html'
+          sandbox='allow-scripts'
+          onLoad={() => this.componentDidUpdate(null)}
+          style={{width: '100%', height: '100%'}} />
     );
   }
 
   componentDidUpdate(prevProps: Props) {
-    const indirectEval = eval;
+    const { html, css, js, data } = this.props;
+    const jsData = utils.formatData(data);
+    const fullJS = `const data = \`${jsData}\`;\n${js}`;
 
-    const data = utils.formatData(this.props.data);
-    const fullJS = `const data = \`${data}\`;\n${this.props.js}`;
-    indirectEval(fullJS);
+    const frame = this.refs.frame as HTMLIFrameElement;
+    frame.contentWindow.postMessage({ html, css, fullJS }, '*');
   }
 
   componentDidMount() {
+    window.addEventListener('message', e => {
+      const frame = this.refs.frame as HTMLIFrameElement;
+      if (e.origin === "null" && e.source === frame.contentWindow) {
+        console.log('message from iframe', e);
+      }
+    });
     this.componentDidUpdate(null);
   }
 }

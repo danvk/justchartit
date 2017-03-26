@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <link rel='stylesheet' href='dygraphs/dygraph.css' />
+  <style id='style'></style>
+  <script src='dygraphs/dygraph.js'></script>
+</head>
+<body>
+</body>
+
+<script>
+window.addEventListener('message', e => {
+  const mainWindow = e.source;
+  const indirectEval = eval;
+  const { css, fullJS, html } = e.data;
+  console.log(e);
+  document.getElementById('style').innerHTML = css;
+  document.body.innerHTML = html;
+  try {
+    indirectEval(fullJS);
+  } catch (error) {
+    mainWindow.postMessage({ error: error.toString() }, e.origin);
+  }
+  mainWindow.postMessage({ ok: true }, e.origin);
+});
+</script>
+</html>
