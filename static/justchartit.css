@@ -35,6 +35,7 @@ body {
 
   font-family: arial, sans-serif;
   font-size: small;
+  padding: 5px;
 }
 
 .editors-panel {
@@ -60,18 +61,17 @@ body {
 }
 
 .layout-default .table-panel,
-.layout-js-primary .editors-panel {
-  left: 0;
-  top: 64px;
-  bottom: 0;
-  right: 50%;
-  padding: 5px;
-}
-
-.layout-default .editors-panel,
-.layout-js-primary .table-panel {
+.layout-data-primary .editors-panel {
   left: 50%;
   top: 50%;
   right: 0;
   bottom: 0;
+}
+
+.layout-default .editors-panel,
+.layout-data-primary .table-panel {
+  left: 0;
+  top: 64px;
+  bottom: 0;
+  right: 50%;
 }

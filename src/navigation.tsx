@@ -10,6 +10,7 @@ import MenuItem from 'material-ui/MenuItem';
 import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import Popover from 'material-ui/Popover';
+import Subheader from 'material-ui/Subheader';
 
 import {spacing, typography, zIndex} from 'material-ui/styles';
 import {cyan500} from 'material-ui/styles/colors';
@@ -59,7 +60,7 @@ class Navigation extends React.Component<Props, State> {
             <Menu>
               <MenuItem rightIcon={<ArrowDropRight/>} menuItems={[
               <MenuItem insetChildren={true} checked={layout === 'default'} onTouchTap={() => onSetLayout('default')}>Default</MenuItem>,
-              <MenuItem insetChildren={true} checked={layout === 'js-primary'} onTouchTap={() => onSetLayout('js-primary')}>JS primary</MenuItem>
+              <MenuItem insetChildren={true} checked={layout === 'data-primary'} onTouchTap={() => onSetLayout('data-primary')}>Data primary</MenuItem>
             ]}>Layout</MenuItem>
             </Menu>
             <RaisedButton onClick={this.props.onRun} label='Run' />
@@ -69,22 +70,24 @@ class Navigation extends React.Component<Props, State> {
         <Drawer
             open={this.state.drawerOpen}
             onRequestChange={this.setDrawerOpen}
-            docked={false}
-        >
+            docked={false} >
           <div style={styles.logo}>
             Just Chart It!
           </div>
 
-          <Divider />
-          <MenuItem disabled={true}>dygraphs resources</MenuItem>
-          <MenuItem insetChildren={true}>Options Reference</MenuItem>
-          <MenuItem insetChildren={true}>API Reference</MenuItem>
-          <MenuItem insetChildren={true}>Stack Overflow</MenuItem>
-          <MenuItem insetChildren={true} href='http://dygraphs.com/'>Web Site</MenuItem>
-          <MenuItem insetChildren={true}>Blog</MenuItem>
-          <MenuItem insetChildren={true}>Tutorial</MenuItem>
-          <Divider />
-          <MenuItem>About Just Chart It</MenuItem>
+          <Menu desktop>
+            <Subheader>dygraphs resources</Subheader>
+            <MenuItem target='_blank' href='http://dygraphs.com/options.html'>Options Reference</MenuItem>
+            <MenuItem target='_blank' href='http://dygraphs.com/jsdoc/symbols/Dygraph.html'>API Reference</MenuItem>
+            <MenuItem target='_blank' href='http://dygraphs.com/data.html'>Data Format reference</MenuItem>
+            <MenuItem target='_blank' href='http://dygraphs.com/css.html'>CSS reference</MenuItem>
+            <MenuItem target='_blank' href='http://stackoverflow.com/questions/tagged/dygraphs'>Stack Overflow</MenuItem>
+            <MenuItem target='_blank' href='http://dygraphs.com/'>Web Site</MenuItem>
+            <MenuItem target='_blank' href='http://blog.dygraphs.com/'>Blog</MenuItem>
+            <MenuItem target='_blank' href='http://dygraphs.com/tutorial.html'>Tutorial</MenuItem>
+            <Divider />
+            <MenuItem>About Just Chart It</MenuItem>
+          </Menu>
         </Drawer>
       </div>
     );

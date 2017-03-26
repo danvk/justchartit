@@ -47,6 +47,7 @@ const STYLES = {
   },
   container: {
     height: '100%',
+    paddingTop: '8px',
   },
   tabItemContainerStyle: {
     backgroundColor: lightBaseTheme.palette.accent2Color,
@@ -112,20 +113,20 @@ class Root extends React.Component<{}, AppState> {
               </div>
             </Tab>
 
-            <Tab label='HTML' style={STYLES.tabItem}>
-              <MonacoEditor
-                value={this.state.html}
-                language='html'
-                onReady={this.stashEditorReference('html')}
-                onSubmit={this.updateHTML} />
-            </Tab>
-
             <Tab label='CSS' style={STYLES.tabItem}>
               <MonacoEditor
                 value={this.state.css}
                 language='css'
                 onReady={this.stashEditorReference('css')}
                 onSubmit={this.updateCSS} />
+            </Tab>
+
+            <Tab label='HTML' style={STYLES.tabItem}>
+              <MonacoEditor
+                value={this.state.html}
+                language='html'
+                onReady={this.stashEditorReference('html')}
+                onSubmit={this.updateHTML} />
             </Tab>
           </Tabs>
         </div>

@@ -4,7 +4,7 @@
 
 export type Edit = [number, number, string, string];  // row, col, old value, new value
 
-export type Layout = 'default' | 'js-primary';
+export type Layout = 'default' | 'data-primary';
 
 export interface SetCells {
   type: 'set-cells',
