@@ -57,6 +57,7 @@ class Navigation extends React.Component<Props, State> {
       <div>
         <AppBar title='Just Chart It!' onLeftIconButtonTouchTap={this.openDrawer}>
           <ToolbarGroup firstChild={true}>
+            {/* TODO: this should be a popover */}
             <Menu>
               <MenuItem rightIcon={<ArrowDropRight/>} menuItems={[
               <MenuItem insetChildren={true} checked={layout === 'default'} onTouchTap={() => onSetLayout('default')}>Default</MenuItem>,
