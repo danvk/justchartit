@@ -62,7 +62,7 @@ export default class Spreadsheet extends React.Component<Props, State> {
       },
 
       allowInvalid: true,
-      validator: function(cell: string, callback: (valid: boolean) => any) {
+      validator: function(this: any, cell: string, callback: (valid: boolean) => any) {
         const {row, col} = this;
         if (row >= 1 && col >= 1 && isNaN(Number(cell)) && cell !== 'NaN') {
           callback(false);

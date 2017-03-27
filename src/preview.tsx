@@ -7,25 +7,46 @@ import * as utils from './utils';
 interface Props extends DataStoreState {
 }
 
+function makeFrameHTML(props: Props): string {
+  const { html, css, js, data } = props;
+  const jsData = utils.formatData(data);
+  const fullJS = `const data = \`${jsData}\`;\n${js}`;
+
+  return `<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <link rel='stylesheet' href='dygraphs/dygraph.css' />
+  <style>
+${css}
+  </style>
+  <script src='dygraphs/dygraph.js'></script>
+</head>
+<body>
+${html}
+</body>
+<script type='text/javascript'>
+${fullJS}
+</script>
+</html>
+  `;
+}
+
 export default class Preview extends React.Component<Props, {}> {
   render(): JSX.Element {
     return (
       <iframe
           ref='frame'
-          src='runner.html'
           sandbox='allow-scripts'
-          onLoad={() => this.componentDidUpdate(null)}
+          frameBorder={0}
           style={{width: '100%', height: '100%'}} />
     );
   }
 
   componentDidUpdate(prevProps: Props) {
-    const { html, css, js, data } = this.props;
-    const jsData = utils.formatData(data);
-    const fullJS = `const data = \`${jsData}\`;\n${js}`;
-
     const frame = this.refs.frame as HTMLIFrameElement;
-    frame.contentWindow.postMessage({ html, css, fullJS }, '*');
+    (frame as any).srcdoc = makeFrameHTML(this.props);
+    // frame.contentWindow.postMessage({ html, css, fullJS }, '*');
   }
 
   componentDidMount() {
