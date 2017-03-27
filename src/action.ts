@@ -6,6 +6,8 @@ export type Edit = [number, number, string, string];  // row, col, old value, ne
 
 export type Layout = 'default' | 'data-primary';
 
+import { GitHubProfile } from './oauth';
+
 export interface SetCells {
   type: 'set-cells',
   source: string;  // e.g. autofill, paste, edit, ...
@@ -45,6 +47,11 @@ export interface SetLayout {
   layout: Layout;
 }
 
+export interface ReceiveProfile {
+  type: 'receive-profile';
+  profile: GitHubProfile;
+}
+
 // This action gets fired once for each editor when the page loads.
 // It lets the data store figure out the contents of each editor when you click "Run".
 export interface StashEditorReference {
@@ -61,6 +68,7 @@ type Action = CreateShareLink |
               SetLayout |
               ReportError |
               Run |
+              ReceiveProfile |
               StashEditorReference ;
 
 export default Action;

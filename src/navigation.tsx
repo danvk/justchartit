@@ -1,6 +1,7 @@
 import * as React from 'react';
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import IconButton from 'material-ui/IconButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import Drawer from 'material-ui/Drawer';
@@ -16,6 +17,7 @@ import {spacing, typography, zIndex} from 'material-ui/styles';
 import {cyan500} from 'material-ui/styles/colors';
 
 import { Layout } from './action';
+import { redirectToAuthorize } from './oauth';
 
 const styles = {
   logo: {
@@ -49,6 +51,7 @@ class Navigation extends React.Component<Props, State> {
     }
     this.setDrawerOpen = this.setDrawerOpen.bind(this);
     this.openDrawer = this.openDrawer.bind(this);
+    this.login = this.login.bind(this);
   }
 
   render() {
@@ -66,6 +69,7 @@ class Navigation extends React.Component<Props, State> {
             </Menu>
             <RaisedButton onClick={this.props.onRun} label='Run' />
             <RaisedButton onClick={this.props.onShare} label='Share' />
+            <RaisedButton onClick={this.login} label='Log In' />
           </ToolbarGroup>
         </AppBar>
         <Drawer
@@ -104,6 +108,11 @@ class Navigation extends React.Component<Props, State> {
 
   onChangeLayout(e: any, i: number, value: Layout) {
     this.props.onSetLayout(value);
+  }
+
+  login() {
+    // Start the OAuth flow.
+    redirectToAuthorize();
   }
 }
 

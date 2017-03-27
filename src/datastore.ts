@@ -4,6 +4,7 @@ import Action, * as actions from './action';
 
 import * as defaults from './defaults';
 import * as gist from './gist';
+import * as oauth from './oauth';
 import * as utils from './utils';
 
 /** This is the state exported by this store via store.getState(). */
@@ -144,6 +145,14 @@ function createStore() {
       shareLink,
     };
   }
+
+  oauth.checkForOAuthCode(async () => {
+    const profile = await oauth.getUserProfile();
+    handleAction({
+      type: 'receive-profile',
+      profile,
+    });
+  });
 
   initialize();
 
